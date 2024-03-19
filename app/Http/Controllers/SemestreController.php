@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\DB;
 use App\Models\Semestre;
+use Exception;
 class SemestreController extends Controller
 {
     public function store(Request $request){
@@ -18,7 +19,7 @@ class SemestreController extends Controller
                     "message"=>"l'année est ajouté avec succès",
                     "data"=>$annee
                 ]);
-            });  
+            });
         }catch(Exception $e){
             return response()->json([
                 "statut"=>221,

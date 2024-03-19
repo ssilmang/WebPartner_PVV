@@ -11,6 +11,7 @@ use App\Http\Controllers\AnneeController;
 use App\Http\Controllers\SemestreController;
 use App\Http\Controllers\OutilController;
 use App\Http\Controllers\ObjectifController;
+use App\Http\Controllers\RAController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,8 @@ Route::controller(PallierController::class)->prefix('Sonatel_dv')->group(functio
 });
 Route::controller(UserController::class)->prefix('Sonatel_dv')->group(function(){
     Route::post('create/user','store');
+    Route::get('index/user/{id}','indexCC');
+    Route::post('objectif/update/{id}','updateObjectif');
 });
 Route::controller(RoleController::class)->prefix('Sonatel_dv')->group(function(){
     Route::post('create/role','store');
@@ -55,6 +58,13 @@ Route::controller(ObjectifController::class)->prefix('Sonatel_dv')->group(functi
     Route::post('create/objectif','store');
     Route::get('index/objectif','index');
     Route::delete('delete/objectif/{id}/{annee}','delete');
+   
+    
+});
+Route::controller(RAController::class)->prefix('Sonatel_dv')->group(function(){
+    // Route::post('create/ra','store');
+    // Route::delete('delete/ra/{id}/{annee}','delete');
+    Route::get('index/ra','index');
     
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

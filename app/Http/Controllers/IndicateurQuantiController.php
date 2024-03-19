@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\indicateurQuanti;
+use App\Models\IndicateurQuanti;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\IndicateurQuantiResource;
@@ -10,6 +10,7 @@ use App\Http\Resources\IndicateurQualiResource;
 use App\Models\IndicateurQuali;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\Pallier;
+use Exception;
 use App\Models\Outil;
 use App\Http\Resources\PallierResource;
 class IndicateurQuantiController extends Controller
@@ -44,7 +45,7 @@ class IndicateurQuantiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-   
+
     public function store(Request $request)
     {
         try
@@ -73,7 +74,7 @@ class IndicateurQuantiController extends Controller
             ]);
         }
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -88,7 +89,7 @@ class IndicateurQuantiController extends Controller
      */
     public function edit(indicateurQuanti $indicateurQuanti)
     {
-        
+
     }
 
     /**

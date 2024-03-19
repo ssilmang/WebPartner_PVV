@@ -16,6 +16,10 @@ use App\Http\Resources\ObjectifResource;
 use App\Http\Resources\RoleResource;
 use App\Http\Resources\RaResource;
 
+use Exception;
+
+
+
 class OutilController extends Controller
 {
     public function store(Request $request){

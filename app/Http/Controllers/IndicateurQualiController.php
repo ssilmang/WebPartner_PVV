@@ -10,11 +10,11 @@ class IndicateurQualiController extends Controller
 {
     public function store(Request $request)
     {
-        
+
         try
         {
             return DB::transaction(function() use($request){
-                
+
                 $quali =new IndicateurQuali();
                 $quali->indicateur = $request->indicateur;
                 $quali->poids_RA = $request->poids_RA;
@@ -60,7 +60,7 @@ class IndicateurQualiController extends Controller
                 "data"=>$indicateurQuali
             ]);
         }
-       
-        
+
+
     }
 }

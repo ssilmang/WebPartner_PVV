@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class indicateurQuali extends Model
+class IndicateurQuali extends Model
 {
     use HasFactory,SoftDeletes;
     protected $fillable = ['quali', 'objectif'];
