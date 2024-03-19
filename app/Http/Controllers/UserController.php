@@ -6,11 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+
 use App\Models\Role;
 use App\Models\Ra;
 use App\Models\Cc;
 use App\Models\Objectifra;
 use App\Models\Objectifcc;
+use App\Http\Resources\ObjectifccResource;
+
+
+use Exception;
 
 class UserController extends Controller
 {
@@ -19,6 +24,9 @@ class UserController extends Controller
         try{
             return DB::transaction(function() use($request){
                 $username = $request->name.'_'. $request->matricule;
+
+
+
                 $user = new User();
                     $user->name=$request->name;
                     $user->prenom=$request->prenom;
@@ -77,6 +85,75 @@ class UserController extends Controller
             return response()->json([
                 "statut"=>221,
                 "message"=>"erreur l'hort de l'ajout d'un utilisateur",
+                "data"=>$e->getMessage(),
+            ]);
+        }
+    }
+    public function indexCC(Request $request,$idcc)
+    {
+        try{
+            $user = User::where('id',$idcc)->first();
+            $cc = Cc::where('user_id',$user->id)->first();
+          
+            $objectifs = Objectifcc::where('cc_id',$cc->id)->get();
+            return response()->json([
+                "statut"=>200,
+                "message"=>"les objectifs  de cette user",
+                "data"=>[
+                    "cc"=>ObjectifccResource::collection($objectifs)
+                ],
+            ]);
+        }catch(Exception $e)
+        {
+            return response()->json([
+                "statut"=>221,
+                "message"=>"erreur",
+                "data"=>$e->getMessage(),
+            ]);
+        }
+    }
+    public function updateObjectif(Request $request,$id){
+        try{
+            $objectifcc = Objectifcc::find($id);
+            if($objectifcc){
+                $objectifcc->increment("realisation",$request->realisation);
+                $taux = ($objectifcc->realisation/ $objectifcc->value) *100 ;
+                if($taux - floor($taux)>= 0.5){
+                    $taux = ceil($taux);
+                }else{
+                    $taux = floor($taux);
+                }
+                 $objectifcc->update(["taux"=>$taux]);
+                 $objectifcc->save();
+                $ObjectifAllra= Objectifcc::where('objectifra_id',$request->objectifra_id)->get()->pluck('realisation')->toArray();
+                $sum=array_sum($ObjectifAllra);
+                $ra= Objectifra::where('id',$request->objectifra_id)->first();
+                $ra->update(['realisation'=>$sum]);
+                $valuer = ($ra->realisation/ $ra->value) * 100 ;
+                
+                if($valuer - floor($valuer)>= 0.5){
+                    $valuer = ceil($valuer);
+                }else{
+                    $valuer = floor($valuer);
+                }
+                 $ra->update(["taux"=>$valuer]);
+                 $ra->save();
+                return response()->json([
+                    "statut"=>200,
+                    "message">"Realisation effectuer avec succès",
+                    "data"=>[
+                        "cc"=>ObjectifccResource::make($objectifcc)
+                    ],
+                ]);
+            }else{
+                return response()->json([
+                    "message"=>"l'objectif n'existe pas"
+                ]);
+            }
+        }catch(Exception $e){
+            return response()->json([
+                "statut"=>221,
+                "message"=>"erreur",
                 "data"=>$e->getMessage(),
             ]);
         }
