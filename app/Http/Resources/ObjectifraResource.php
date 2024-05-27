@@ -20,6 +20,7 @@ class ObjectifraResource extends JsonResource
             "realisation"=>$this->realisation,
             "taux"=>$this->taux,
             "objectifs"=>ObjectifResource::make($this->objectif),
+            "stockra"=>StockraResource::collection($this->stockras)
             
         ];
     }

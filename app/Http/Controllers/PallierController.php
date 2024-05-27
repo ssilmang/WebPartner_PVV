@@ -18,10 +18,10 @@ class PallierController extends Controller
                     "condition"=>$request->condition,
                     "regle_pallier"=>$request->regle_pallier,
                     "regle_pallier_sablix"=>$request->regle_pallier_sablix,
-                    "commission_CC"=>$request->commission_RA,
-                    "commission_RA"=>$request->commission_CC,
-                    "commission_RAVT"=>$request->commission_RAVT,
-                    "commission_SADI"=>$request->commission_SADI,
+                    "commission_CC"=>str_replace(' ', '', $request->commission_CC),
+                    "commission_RA"=>str_replace(' ', '', $request->commission_RA),
+                    // "commission_RAVT"=>$request->commission_RAVT,
+                    // "commission_SADI"=>$request->commission_SADI,
                 ]);
                 return response()->json([
                     "statut"=>Response::HTTP_OK,
@@ -43,11 +43,11 @@ class PallierController extends Controller
                 "libelle"=>$request->libelle,
                 "regle_pallier"=>$request->regle_pallier,
                 "condition"=>$request->condition,
-                "commission_CC"=>$request->commission_CC,
-                "commission_RA"=>$request->commission_RA,
-                "commission_RAVT"=>$request->commission_RAVT,
-                "commissioon_SADI"=>$request->commissioon_SADI,
-                "regle_pallier_sablix"=>$request->regle_pallier_sablix,
+                "commission_CC"=>str_replace(' ', '', $request->commission_CC),
+                "commission_RA"=>str_replace(' ', '',$request->commission_RA),
+                // "commission_RAVT"=>$request->commission_RAVT,
+                // "commissioon_SADI"=>$request->commissioon_SADI,
+                // "regle_pallier_sablix"=>$request->regle_pallier_sablix,
             ]);
             return response()->json([
                 "statut"=>200,
@@ -62,7 +62,5 @@ class PallierController extends Controller
                 "data"=>$pallier
             ]);
         }
-       
-        
     }
 }

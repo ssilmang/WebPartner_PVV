@@ -98,8 +98,5 @@ class ObjectifController extends Controller
                 "data"=>$objectif
             ]);
         }
-
     }
-   
-
 }

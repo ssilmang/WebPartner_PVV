@@ -19,8 +19,8 @@ class IndicateurQualiController extends Controller
                 $quali->indicateur = $request->indicateur;
                 $quali->poids_RA = $request->poids_RA;
                 $quali->poids_CC = $request->poids_CC;
-                $quali->poids_SADI = $request->poids_SADI;
-                $quali->poids_RAVT = $request->poids_RAVT;
+                // $quali->poids_SADI = $request->poids_SADI;
+                // $quali->poids_RAVT = $request->poids_RAVT;
                 $quali->objectif = $request->objectif;
                 $quali->save();
                 return response()->json([
@@ -43,8 +43,8 @@ class IndicateurQualiController extends Controller
             $indicateurQuali->indicateur=$request->indicateur;
             $indicateurQuali->poids_CC=$request->poids_CC;
             $indicateurQuali->poids_RA=$request->poids_RA;
-            $indicateurQuali->poids_RAVT=$request->poids_RAVT;
-            $indicateurQuali->poids_SADI=$request->poids_SADI;
+            // $indicateurQuali->poids_RAVT=$request->poids_RAVT;
+            // $indicateurQuali->poids_SADI=$request->poids_SADI;
             $indicateurQuali->objectif=$request->objectif;
             $indicateurQuali->save();
             return response()->json([
