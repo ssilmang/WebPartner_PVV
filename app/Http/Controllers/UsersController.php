@@ -44,7 +44,7 @@ use App\Mail\SendMail;
 use App\Models\Drv;
 use Exception;
 
-class UserController extends Controller
+class UsersController extends Controller
 {
     public function store(UserRequest $request)
     {

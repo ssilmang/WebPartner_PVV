@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndicateurQualiController;
 use App\Http\Controllers\IndicateurQuantiController;
 use App\Http\Controllers\PallierController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AnneeController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\SemestreController;
-use App\Http\Controllers\OutilController;
+use App\Http\Controllers\OutilsController;
 use App\Http\Controllers\ObjectifController;
 use App\Http\Controllers\PrestataireController;
 use App\Http\Controllers\RAController;
@@ -27,7 +27,7 @@ use App\Http\Controllers\RealisationCCController;
 |
 */
 Route::post('import',[ExportController::class,'import']);
-Route::controller(UserController::class)->prefix('Sonatel_dv')->group(function(){
+Route::controller(UsersController::class)->prefix('Sonatel_dv')->group(function(){
     Route::post('login/user','login');
     Route::post('registre/user','registrer');
     Route::post('updatePassword/user','updatePassword');
@@ -57,7 +57,7 @@ Route::middleware('auth:sanctum')->prefix('Sonatel_dv')->group(function(){
         Route::post('create/pallier','store');
         Route::put('update/pallier/{pallier}','update');
     });
-    Route::controller(UserController::class)->group(function(){
+    Route::controller(UsersController::class)->group(function(){
         Route::post('create/user','store');
         Route::get('index/user/{id}','indexCC');
         Route::post('objectif/update/{id}','updateObjectif');
@@ -74,7 +74,7 @@ Route::middleware('auth:sanctum')->prefix('Sonatel_dv')->group(function(){
     Route::controller(SemestreController::class)->group(function(){
         Route::post('create/semestre','store');
     });
-    Route::controller(OutilController::class)->group(function(){
+    Route::controller(OutilsController::class)->group(function(){
         Route::post('create/outil','store');
         Route::get('index/outil','index');
     });

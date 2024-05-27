@@ -24,7 +24,7 @@ use Exception;
 
 
 
-class OutilController extends Controller
+class OutilsController extends Controller
 {
     public function store(Request $request){
         try{
